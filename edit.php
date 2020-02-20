@@ -109,7 +109,7 @@ include('condb.php');
 				<div class="form-group">
 					<label class="col-sm-3 control-label">ProjectStart</label>
 					<div class="col-sm-2">
-						<input type="text" name="tanggal_lahir" value="<?php echo $row ['tanggal_lahir']; ?>" class="input-group date form-control" date="" data-date-format="yyyy-mm-dd" placeholder="0000-00-00" required>
+						<input type="date" name="tanggal_lahir" value="<?php echo $row ['tanggal_lahir']; ?>" class="form-control" id="dateofbirth" date="" data-date-format="dd-mm-yyyy" placeholder="00-00-0000" required>
 					</div>
         </div>
 				<div class="form-group">
@@ -117,9 +117,9 @@ include('condb.php');
 					<div class="col-sm-2">
 						<select name="status" class="form-control">
 							<option value="">-  สถานะล่าสุด  -</option>
-                            <option value="Outsourcing">Outsourcing</option>
-							<option value="Kontrak">Kontrak</option>
-							<option value="Tetap">Tetap</option>
+                            <option value="กำลังดำเนินการ">กำลังดำเนินการ</option>
+							<option value="ยังไม่แล้วเสร็จ">ยังไม่แล้วเสร็จ</option>
+							<option value="ดำเนินการเสร็จสิ้น">ดำเนินการเสร็จสิ้น</option>
 						</select>
 					</div>
                     <div class="col-sm-3">

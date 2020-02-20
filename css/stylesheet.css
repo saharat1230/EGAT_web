@@ -105,6 +105,7 @@ footer {
   background-color: #FFE97A;
   color: #1E4394;
   padding: 15px;
+  bottom:0px;
   font-family: 'Prompt', sans-serif;
 }
 .horizontal {

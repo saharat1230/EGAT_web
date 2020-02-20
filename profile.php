@@ -90,10 +90,7 @@ $level = $_SESSION['level'];
 				</tr>
 				<th>ProjectStart</th>
 				<td><?php echo $row['tanggal_lahir']; ?></td>
-			</tr>
-			<th>ProjectEndtart</th>
-			<td><?php echo $row['tanggal_lahir']; ?></td>
-		</tr>
+			   </tr>
 					<th>Status</th>
 					<td><?php echo $row['status']; ?></td>
 				</tr>

@@ -68,15 +68,15 @@ include('condb.php');
 					<select name="filter" class="form-control" onchange="form.submit()">
 						<option value="0">ตัวกรองข้อมูลแอปพลิเคชั่น</option>
 						<?php $filter = (isset($_GET['filter']) ? strtolower($_GET['filter']) : null);  ?>
-						<option value="Tetap" <?php if ($filter == 'Tetap') {
+						<option value="ดำเนินการเสร็จสิ้น" <?php if ($filter == 'ดำเนินการเสร็จสิ้น') {
                     echo 'selected';
-                } ?>>Tetap</option>
-						<option value="Kontrak" <?php if ($filter == 'Kontrak') {
+                } ?>>ดำเนินการเสร็จสิ้น</option>
+						<option value="ยังไม่แล้วเสร็จ" <?php if ($filter == 'ยังไม่แล้วเสร็จ') {
                     echo 'selected';
-                } ?>>Kontrak</option>
-                        <option value="Outsourcing" <?php if ($filter == 'Outsourcing') {
+                } ?>>ยังไม่แล้วเสร็จ</option>
+                        <option value="กำลังดำเนินการ" <?php if ($filter == 'กำลังดำเนินการ') {
                     echo 'selected';
-                } ?>>Outsourcing</option>
+                } ?>>กำลังดำเนินการ</option>
 					</select>
 				</div>
 			</form>
@@ -93,6 +93,7 @@ include('condb.php');
     					<th>Status</th>
                         <th>จัดการ</th>
     				</tr>
+
     				<?php
                     if ($filter) {
                         $sql = mysqli_query($con, "SELECT * FROM karyawan WHERE status='$filter' ORDER BY nik ASC");
@@ -104,7 +105,7 @@ include('condb.php');
                     } else {
                         $no = 1;
                         while ($row = mysqli_fetch_assoc($sql)) {
-                            echo '
+                          echo '
     						<tr>
     							<td>'.$no.'</td>
                   <td>'.$row['nik'].'</td>
@@ -114,12 +115,12 @@ include('condb.php');
     							<td>'.$row['tanggal_lahir'].'</td>
                                 <td>'.$row['tanggal_lahir'].'</td>
     							<td>';
-                            if ($row['status'] == 'Tetap') {
-                                echo '<span class="label label-success">Tetap</span>';
-                            } elseif ($row['status'] == 'Kontrak') {
-                                echo '<span class="label label-info">Kontrak</span>';
-                            } elseif ($row['status'] == 'Outsourcing') {
-                                echo '<span class="label label-warning">Outsourcing</span>';
+                            if ($row['status'] == 'ดำเนินการเสร็จสิ้น') {
+                                echo '<span class="label label-success">ดำเนินการเสร็จสิ้น</span>';
+                            } elseif ($row['status'] == 'ยังไม่แล้วเสร็จ') {
+                                echo '<span class="label label-info">ยังไม่แล้วเสร็จ</span>';
+                            } elseif ($row['status'] == 'กำลังดำเนินการ') {
+                                echo '<span class="label label-warning">กำลังดำเนินการ</span>';
                             }
                             echo '
     							</td>
@@ -131,17 +132,18 @@ include('condb.php');
     						';
                             $no++;
                         }
-                    }
+                      }
                     ?>
 
     			</table>
     			</div>
         </div>
   </div>
-</div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
 <center><a href="admin.php" class="btn btn-sm btn-info">กลับเมนูหลัก</a></center>
 <br>
-<div class="footer">
 <footer class="container-fluid text-center">
   <center><img src="img\EGAT_Logo.png" class="img-responsive" width="5%" alt="Footer Image" /></center>
   <p><h5>Copyright 2020 : ระบบติดตามแอปพลิเคชั่น Application tracking system แผนก หรจ-ห. กอง กทห-ห. ฝ่ายจัดการและพัฒนาระบบสารสนเทศ (อจส.)</h5></p>
