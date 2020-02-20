@@ -1,0 +1,71 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 50px 50px;
+}
+
+.container {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-rows: repeat(2, 100px);
+}
+
+.container {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(auto-fit, 100px);
+  grid-template-rows: repeat(2, 100px);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(2, 50px);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px;
+  background-color: white;
+  padding: 50px;
+}
+
+.grid-container>div {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid grey;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+div.static {
+  position: static;
+  border: 50px solid white;
+}
+
+.myButton {
+  box-shadow: 0px 0px 0px 0px #3dc21b;
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid gray;
+  display: inline-block;
+  cursor: pointer;
+  color: black;
+  font-family: 'Prompt', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 28px 51px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #2f6627;
+}
+
+.myButton:hover {
+  background-color: #5cbf2a;
+}
+
+.myButton:active {
+  position: relative;
+  top: 1px;
+}
