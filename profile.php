@@ -51,9 +51,9 @@ $level = $_SESSION['level'];
 			<hr />
 
 			<?php
-            $nik = $_GET['nik'];
+            $id = $_GET['id'];
 
-            $sql = mysqli_query($con, "SELECT * FROM karyawan WHERE nik='$nik'");
+            $sql = mysqli_query($con, "SELECT * FROM appdata WHERE id='$id'");
             if (mysqli_num_rows($sql) == 0) {
                 header("Location: app.php");
             } else {
@@ -61,7 +61,7 @@ $level = $_SESSION['level'];
             }
 
             if (isset($_GET['aksi']) == 'delete') {
-                $delete = mysqli_query($con, "DELETE FROM karyawan WHERE nik='$nik'");
+                $delete = mysqli_query($con, "DELETE FROM appdata WHERE id='$id'");
                 if ($delete) {
                     echo '<div class="alert alert-danger alert-dismissable">><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ลบข้อมูลสำเร็จแล้ว.</div>';
                     header("refresh: 1; url=app.php");
@@ -74,37 +74,37 @@ $level = $_SESSION['level'];
 			<table class="table table-striped table-condensed">
 				<tr>
 					<th width="20%">ID</th>
-					<td><?php echo $row['nik']; ?></td>
+					<td><?php echo $row['id']; ?></td>
 				</tr>
 				<tr>
 					<th>AppName</th>
-					<td><?php echo $row['nama']; ?></td>
+					<td><?php echo $row['appname']; ?></td>
 				</tr>
 				<tr>
 					<th>Description</th>
-					<td><?php echo $row['alamat']; ?></td>
+					<td><?php echo $row['description']; ?></td>
 				</tr>
 				<tr>
 					<th>Contact Point</th>
-					<td><?php echo $row['tempat_lahir']; ?></td>
+					<td><?php echo $row['contact_point']; ?></td>
 				</tr>
 				<th>ProjectStart</th>
-				<td><?php echo $row['tanggal_lahir']; ?></td>
+				<td><?php echo $row['project_start']; ?></td>
 			   </tr>
 					<th>Status</th>
 					<td><?php echo $row['status']; ?></td>
 				</tr>
 			</table>
 
-			<a href="app.php" class="btn btn-sm btn-info">ย้อนกลับ</a>
-			<a href="edit.php?nik=<?php echo $row['nik']; ?>" class="btn btn-sm btn-success"></span>แก้ไขข้อมูล</a>
-			<a href="profile.php?aksi=delete&nik=<?php echo $row['nik']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('คุณแน่ใจว่าจะลบข้อมูล <?php echo $row['nama']; ?>')"></span> ลบข้อมูล</a>
+			<a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-success"></span>แก้ไขข้อมูล</a>
+			<a href="profile.php?aksi=delete&id=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('คุณแน่ใจว่าจะลบข้อมูล <?php echo $row['appname']; ?>')"></span> ลบข้อมูล</a>
 		</div>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-
+<center><a href="app.php" class="btn btn-sm btn-default">ย้อนกลับ</a>&nbsp;<a href="admin.php" class="btn btn-sm btn-default">กลับเมนูหลัก</a></center>
+</br>
 	<footer class="container-fluid text-center">
 	  <center><img src="img\EGAT_Logo.png" class="img-responsive" width="5%" alt="Footer Image" /></center>
 	  <p><h5>Copyright 2020 : ระบบติดตามแอปพลิเคชั่น Application tracking system แผนก หรจ-ห. กอง กทห-ห. ฝ่ายจัดการและพัฒนาระบบสารสนเทศ (อจส.)</h5></p>

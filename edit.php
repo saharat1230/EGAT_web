@@ -50,66 +50,64 @@ include('condb.php');
 			<hr />
 
 			<?php
-			$nik = $_GET['nik'];
-			$sql = mysqli_query($con, "SELECT * FROM karyawan WHERE nik='$nik'");
-			if(mysqli_num_rows($sql) == 0){
-				header("Location: index.php");
-			}else{
-				$row = mysqli_fetch_assoc($sql);
-			}
-			if(isset($_POST['save'])){
-				$nik		     = $_POST['nik'];
-				$nama		     = $_POST['nama'];
-				$tempat_lahir	 = $_POST['tempat_lahir'];
-				$tanggal_lahir	 = $_POST['tanggal_lahir'];
-				$alamat		     = $_POST['alamat'];
-				$no_telepon		 = $_POST['no_telepon'];
-				$jabatan		 = $_POST['jabatan'];
-				$status			 = $_POST['status'];
+            $id = $_GET['id'];
+            $sql = mysqli_query($con, "SELECT * FROM appdata WHERE id='$id'");
+            if (mysqli_num_rows($sql) == 0) {
+                header("Location: index.php");
+            } else {
+                $row = mysqli_fetch_assoc($sql);
+            }
+            if (isset($_POST['save'])) {
+                $id		     = $_POST['id'];
+                $appname		     = $_POST['appname'];
+                $contact_point	 = $_POST['contact_point'];
+                $project_start	 = $_POST['project_start'];
+                $description		     = $_POST['description'];
+                $status			 = $_POST['status'];
 
-				$update = mysqli_query($con, "UPDATE karyawan SET nama='$nama', tempat_lahir='$tempat_lahir', tanggal_lahir='$tanggal_lahir', alamat='$alamat', no_telepon='$no_telepon', jabatan='$jabatan', status='$status' WHERE nik='$nik'") or die(mysqli_error());
-				if($update){
-					header("Location: edit.php?nik=".$nik."&pesan=sukses");
-				}else{
-					echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ข้อมูลไม่สามารถบันทึกได้ โปรดลองอีกครั้ง.</div>';
-				}
-			}
+                $update = mysqli_query($con, "UPDATE appdata SET appname='$appname', contact_point='$contact_point', project_start='$project_start', description='$description', status='$status' WHERE id='$id'") or die(mysqli_error());
+                if ($update) {
+                    header("Location: edit.php?id=".$id."&pesan=sukses");
+                } else {
+                    echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ข้อมูลไม่สามารถบันทึกได้ โปรดลองอีกครั้ง.</div>';
+                }
+            }
 
-			if(isset($_GET['pesan']) == 'sukses'){
-				echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>บันทึกข้อมูลเรียบร้อยแล้ว.</div>';
-        // Redirect to another page
-          header("refresh: 1; url=app.php");
-			}
-			?>
+            if (isset($_GET['pesan']) == 'sukses') {
+                echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>บันทึกข้อมูลเรียบร้อยแล้ว.</div>';
+                // Redirect to another page
+                header("refresh: 1; url=app.php");
+            }
+            ?>
 			<form class="form-horizontal" action="" method="post">
 				<div class="form-group">
 					<label class="col-sm-3 control-label">ID</label>
 					<div class="col-sm-2">
-						<input type="text" name="nik" value="<?php echo $row ['nik']; ?>" class="form-control" placeholder="NIK" required>
+						<input type="text" name="id" value="<?php echo $row ['id']; ?>" class="form-control" placeholder="id" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">AppName</label>
 					<div class="col-sm-4">
-							<input type="text" name="nama" value="<?php echo $row ['nama']; ?>" class="form-control" placeholder="Nama" required>
+							<input type="text" name="appname" value="<?php echo $row ['appname']; ?>" class="form-control" placeholder="appname" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Description</label>
 					<div class="col-sm-4">
-						<textarea name="alamat" class="form-control" placeholder="Alamat"><?php echo $row ['alamat']; ?></textarea>
+						<textarea name="description" class="form-control" placeholder="description"><?php echo $row ['description']; ?></textarea>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Contact Point</label>
 					<div class="col-sm-4">
-            <input type="text" name="tempat_lahir" value="<?php echo $row ['tempat_lahir']; ?>" class="form-control" placeholder="Tempat Lahir" required>
+            <input type="text" name="contact_point" value="<?php echo $row ['contact_point']; ?>" class="form-control" placeholder="Tempat Lahir" required>
         </div>
 					</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">ProjectStart</label>
 					<div class="col-sm-2">
-						<input type="date" name="tanggal_lahir" value="<?php echo $row ['tanggal_lahir']; ?>" class="form-control" id="dateofbirth" date="" data-date-format="dd-mm-yyyy" placeholder="00-00-0000" required>
+						<input type="date" name="project_start" value="<?php echo $row ['project_start']; ?>" class="form-control" id="dateofbirth" date="" data-date-format="dd-mm-yyyy" placeholder="00-00-0000" required>
 					</div>
         </div>
 				<div class="form-group">

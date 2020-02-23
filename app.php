@@ -19,10 +19,9 @@ include('condb.php');
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  </head>
   <body>
     <!-- There's nothing here! -->
-      <nav class="navbar-inverse">
+      <nav class="navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
     <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -32,6 +31,7 @@ include('condb.php');
             </button>
             <a class="navbar-brand" href=""><b>AppTrack</b></font> </a>
           </div>
+
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
               <form action="logout.php">
@@ -43,17 +43,18 @@ include('condb.php');
         </div>
         </nav>
         <div class="container">
-      		<div class="content">
+          <div class="content">
+          <h2>จัดการแอปพลิเคชัน</h2>
     			<h2>จัดการแอปพลิเคชัน</h2>
 
     			<?php
                 if (isset($_GET['aksi']) == 'delete') {
-                    $nik = $_GET['nik'];
-                    $cek = mysqli_query($con, "SELECT * FROM karyawan WHERE nik='$nik'");
+                    $id = $_GET['id'];
+                    $cek = mysqli_query($con, "SELECT * FROM appdata WHERE id='$id'");
                     if (mysqli_num_rows($cek) == 0) {
                         echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> ไม่พบข้อมูล</div>';
                     } else {
-                        $delete = mysqli_query($con, "DELETE FROM karyawan WHERE nik='$nik'");
+                        $delete = mysqli_query($con, "DELETE FROM appdata WHERE id='$id'");
                         if ($delete) {
                             echo '<div class="alert alert-primary alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> ลบข้อมูลสำเร็จแล้ว</div>';
                         } else {
@@ -62,11 +63,12 @@ include('condb.php');
                     }
                 }
                 ?>
+
           <form class="form-inline" method="get">
             <a href="add.php" class="btn btn-sm btn-success">เพิ่มแอปพลิเคชั่น</a>
 				<div class="form-group">
 					<select name="filter" class="form-control" onchange="form.submit()">
-						<option value="0">ตัวกรองข้อมูลแอปพลิเคชั่น</option>
+						<option value="0">--ตัวกรองข้อมูลแอปพลิเคชั่น--</option>
 						<?php $filter = (isset($_GET['filter']) ? strtolower($_GET['filter']) : null);  ?>
 						<option value="ดำเนินการเสร็จสิ้น" <?php if ($filter == 'ดำเนินการเสร็จสิ้น') {
                     echo 'selected';
@@ -96,9 +98,9 @@ include('condb.php');
 
     				<?php
                     if ($filter) {
-                        $sql = mysqli_query($con, "SELECT * FROM karyawan WHERE status='$filter' ORDER BY nik ASC");
+                        $sql = mysqli_query($con, "SELECT * FROM appdata WHERE status='$filter' ORDER BY id ASC");
                     } else {
-                        $sql = mysqli_query($con, "SELECT * FROM karyawan ORDER BY nik ASC");
+                        $sql = mysqli_query($con, "SELECT * FROM appdata ORDER BY id ASC");
                     }
                     if (mysqli_num_rows($sql) == 0) {
                         echo '<tr><td colspan="8">ไม่มีข้อมูล.</td></tr>';
@@ -108,11 +110,11 @@ include('condb.php');
                           echo '
     						<tr>
     							<td>'.$no.'</td>
-                  <td>'.$row['nik'].'</td>
-    							<td><a href="profile.php?nik='.$row['nik'].'">'.$row['nama'].'</a></td>
-                                <td>'.$row['alamat'].'</td>
-                                <td>'.$row['tempat_lahir'].'</td>
-    							<td>'.$row['tanggal_lahir'].'</td>
+                  <td>'.$row['id'].'</td>
+    							<td><a href="profile.php?id='.$row['id'].'">'.$row['appname'].'</a></td>
+                                <td>'.$row['description'].'</td>
+                                <td>'.$row['contact_point'].'</td>
+    							<td>'.$row['project_start'].'</td>
                                 <td>'.$row['tanggal_lahir'].'</td>
     							<td>';
                             if ($row['status'] == 'ดำเนินการเสร็จสิ้น') {
@@ -126,7 +128,7 @@ include('condb.php');
     							</td>
     							<td>
 
-    								<a href="edit.php?nik='.$row['nik'].'" title="แก้ไขข้อมูล" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+    								<a href="edit.php?id='.$row['id'].'" title="แก้ไขข้อมูล" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
     							</td>
     						</tr>
     						';
@@ -134,19 +136,18 @@ include('condb.php');
                         }
                       }
                     ?>
-
-    			</table>
-    			</div>
+                  </table>
+                </div>
         </div>
-  </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-<center><a href="admin.php" class="btn btn-sm btn-info">กลับเมนูหลัก</a></center>
-<br>
-<footer class="container-fluid text-center">
-  <center><img src="img\EGAT_Logo.png" class="img-responsive" width="5%" alt="Footer Image" /></center>
-  <p><h5>Copyright 2020 : ระบบติดตามแอปพลิเคชั่น Application tracking system แผนก หรจ-ห. กอง กทห-ห. ฝ่ายจัดการและพัฒนาระบบสารสนเทศ (อจส.)</h5></p>
-</footer>
+    </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <center><a href="admin.php" class="btn btn-sm btn-default">กลับเมนูหลัก</a></center>
+          <br>
+        <footer class="container-fluid text-center">
+        <center><img src="img\EGAT_Logo.png" class="img-responsive" width="5%" alt="Footer Image" /></center>
+        <p><h5>Copyright 2020 : ระบบติดตามแอปพลิเคชั่น Application tracking system แผนก หรจ-ห. กอง กทห-ห. ฝ่ายจัดการและพัฒนาระบบสารสนเทศ (อจส.)</h5></p>
+        </footer>
   </body>
 </html>

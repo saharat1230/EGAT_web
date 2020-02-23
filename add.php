@@ -49,24 +49,19 @@ $level = $_SESSION['level'];
 
 			<?php
 			if(isset($_POST['add'])){
-				$nik		     = $_POST['nik'];
-				$nama		     = $_POST['nama'];
-				$tempat_lahir	 = $_POST['tempat_lahir'];
-				$tanggal_lahir	 = $_POST['tanggal_lahir'];
-				$alamat		     = $_POST['alamat'];
-				$no_telepon		 = $_POST['no_telepon'];
-				$jabatan		 = $_POST['jabatan'];
+				$id		     = $_POST['id'];
+				$appname		     = $_POST['appname'];
+				$contact_point	 = $_POST['contact_point'];
+				$project_start	 = $_POST['project_start'];
+				$description		     = $_POST['description'];
 				$status			 = $_POST['status'];
-				$username		 = $_POST['username'];
-				$pass1	         = $_POST['pass1'];
-				$pass2           = $_POST['pass2'];
 
-				$cek = mysqli_query($con, "SELECT * FROM karyawan WHERE nik='$nik'");
+				$cek = mysqli_query($con, "SELECT * FROM appdata WHERE id='$id'");
 				if(mysqli_num_rows($cek) == 0){
 					if($pass1 == $pass2){
 						$pass = md5($pass1);
-						$insert = mysqli_query($con, "INSERT INTO karyawan(nik, nama, tempat_lahir, tanggal_lahir, alamat, no_telepon, jabatan, status, username, password)
-														VALUES('$nik','$nama', '$tempat_lahir', '$tanggal_lahir', '$alamat', '$no_telepon', '$jabatan', '$status', '$username', '$pass')") or die(mysqli_error());
+						$insert = mysqli_query($con, "INSERT INTO appdata(id, appname, contact_point, project_start, description, status)
+														VALUES('$id','$appname', '$contact_point', '$project_start', '$description', '$status')") or die(mysqli_error());
 						if($insert){
 							echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>บันทึกข้อมูลเรียบร้อยแล้ว.</div>';
 							header("refresh: 1; url=app.php");
@@ -89,31 +84,31 @@ $level = $_SESSION['level'];
 				<div class="form-group">
 					<label class="col-sm-3 control-label">ID</label>
 					<div class="col-sm-2">
-						<input type="text" name="nik" class="form-control" placeholder="รหัสแอปพลิเคชั่น" required>
+						<input type="text" name="id" class="form-control" placeholder="รหัสแอปพลิเคชั่น" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">AppName</label>
 					<div class="col-sm-4">
-						<input type="text" name="nama" class="form-control" placeholder="ชื่อแอปพลิเคชั่น" required>
+						<input type="text" name="appname" class="form-control" placeholder="ชื่อแอปพลิเคชั่น" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Description</label>
 					<div class="col-sm-3">
-						<textarea name="alamat" class="form-control" placeholder="คำอธิบายแอปพลิเคชั่น"></textarea>
+						<textarea name="description" class="form-control" placeholder="คำอธิบายแอปพลิเคชั่น"></textarea>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">Contact Point</label>
 					<div class="col-sm-4">
-						<input type="text" name="tempat_lahir" class="form-control" placeholder="ติดต่อ" required>
+						<input type="text" name="contact_point" class="form-control" placeholder="ติดต่อ" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-3 control-label">ProjectStart</label>
 					<div class="col-sm-2">
-						<input type="date" name="tanggal_lahir" class="form-control" id="dateofbirth" date="" data-date-format="dd-mm-yyyy" placeholder="00-00-0000" required>
+						<input type="date" name="project_start" class="form-control" id="dateofbirth" date="" data-date-format="dd-mm-yyyy" placeholder="00-00-0000" required>
 					</div>
 				</div>
 				<div class="form-group">
@@ -137,6 +132,7 @@ $level = $_SESSION['level'];
 			</form>
 		</div>
 	</div>
+</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

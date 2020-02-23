@@ -107,6 +107,9 @@ footer {
   padding: 15px;
   bottom:0px;
   font-family: 'Prompt', sans-serif;
+  position: absolute;
+  width: 100%;
+
 }
 .horizontal {
   width: 940px;
