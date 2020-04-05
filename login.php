@@ -1,45 +1,35 @@
-<?php
-include('styleslogin.php');
-?>
-<style type="text/css">
-#btn{
-width:100%;
-}
-body {
-  background-color: #FFF0AA;
-}
-body {
-  margin: 0;
-  font-family: 'Prompt', sans-serif;
-  font-size: 16px;
-}
-</style>
 <!DOCTYPE html>
 <html lang='en'>
-<script type="text/javascript">
-            function noBack(){
-                window.history.forward()
-            }
-
-            noBack();
-            window.onload = noBack;
-            window.onpageshow = function(evt) { if (evt.persisted) noBack() }
-            window.onunload = function() { void (0) }
-        </script>
-
-        <script type="text/javascript">
-        function zoom() {
-            document.body.style.zoom = "100%"
-        }
-</script>
+  <script type="text/javascript">
+    function noBack(){
+      window.history.forward()
+    }
+    noBack();
+      window.onload = noBack;
+      window.onpageshow = function(evt) { if (evt.persisted) noBack() }
+      window.onunload = function() { void (0) }
+  </script>
   <head>
     <meta charset='UTF-8'/>
-    <title>Responsive Design</title>
-    <meta name='viewport'
-      content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <title>Application Tracking Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel='stylesheet' href='css/login.css'/>
     <link href="https://fonts.googleapis.com/css?family=Prompt&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
+  <style type="text/css">
+  #btn{
+  width:100%;
+  }
+  body {
+    background-color: #FFF0AA;
+  }
+  body {
+    margin: 0;
+    font-family: 'Prompt', sans-serif;
+    font-size: 16px;
+  }
+  </style>
   <body>
     <!-- There's nothing here! -->
     <div class='page'>
