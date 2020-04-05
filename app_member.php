@@ -1,12 +1,10 @@
 <?php session_start();
 include('condb.php');
-$page=$_GET['page'];
-$strSearch=$_GET['strSearch'];
 
   $ID = $_SESSION['ID'];
   $name = $_SESSION['name'];
   $level = $_SESSION['level'];
-    if ($level!='ADMIN') {
+    if ($level!='Member') {
         Header("Location: login.php");
     }
       ?>
@@ -22,8 +20,6 @@ $strSearch=$_GET['strSearch'];
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/bootstrap-datepicker.css" rel="stylesheet">
   </head>
   <body>
     <!-- There's nothing here! -->
@@ -36,7 +32,7 @@ $strSearch=$_GET['strSearch'];
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-          <a class="navbar-brand" href=""><b>AppTrack</b></a>
+            <a class="navbar-brand" href=""><b>AppTrack</b></a>
           </div>
 
           <div class="collapse navbar-collapse" id="myNavbar">
@@ -47,92 +43,12 @@ $strSearch=$_GET['strSearch'];
               </form>
             </ul>
           </div>
-        </nav>
-        <div class="container">
-          <!-- Modal -->
-          <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4><b>ข้อมูลแอปพลิเคชั่น &raquo; เพิ่มข้อมูล</b></h4>
-                </div>
-                <div class="modal-body">
-                  <form class="form-horizontal" action="save.php" method="post">
-            				<div class="form-group">
-                      <button id="button" class="btn btn-sm btn-primary" onclick="getElementById('random-number').value=Math.floor(Math.random()*100000000)">Generated ID</button>
-            					<label class="col-sm-3 control-label">ID</label>
-            					<div class="col-sm-4">
-            						<input type="text" id="random-number" value="" name="id" class="form-control" placeholder="รหัสแอปพลิเคชั่น" required onKeyUp="if(isNaN(this.value)){ alert('กรุณากรอกตัวเลข'); this.value='';}"/>
-            					</div>
-            				</div>
-            				<div class="form-group">
-            					<label class="col-sm-3 control-label">AppName</label>
-            					<div class="col-sm-7">
-            						<input type="text" name="appname" class="form-control" placeholder="ชื่อแอปพลิเคชั่น" required>
-            					</div>
-            				</div>
-            				<div class="form-group">
-            					<label class="col-sm-3 control-label">Description</label>
-            					<div class="col-sm-7">
-            						<textarea name="description" class="form-control" placeholder="คำอธิบายแอปพลิเคชั่น"></textarea>
-            					</div>
-            				</div>
-            				<div class="form-group">
-            					<label class="col-sm-3 control-label">Contact Point</label>
-            					<div class="col-sm-5">
-            						<input type="text" name="contact_point" class="form-control" placeholder="ติดต่อ" required>
-            					</div>
-            				</div>
-            				<div class="form-group">
-            					<label class="col-sm-3 control-label">Phone Number</label>
-            					<div class="col-sm-4">
-            						<input type="text" name="phone_number" class="form-control" placeholder="หมายเลขโทรศัพท์" required onKeyUp="if(isNaN(this.value)){ alert('กรุกรุณากรอกตัวเลข'); this.value='';}">
-            					</div>
-            				</div>
-            				<div class="form-group">
-            					<label class="col-sm-3 control-label">ProjectStart</label>
-            					<div class="col-sm-4">
-            						<input type="date" name="project_start" class="form-control" id="dateofbirth" date="" data-date-format="dd-mm-yyyy" placeholder="" required>
-            					</div>
-            				</div>
-            				<div class="form-group">
-            					<label class="col-sm-3 control-label">ProjectEnd</label>
-            					<div class="col-sm-4">
-            						<input type="date" name="project_end" class="form-control" id="dateofbirth" date="" data-date-format="dd-mm-yyyy" placeholder="" required>
-            					</div>
-            				</div>
-            				<div class="form-group">
-            					<label class="col-sm-3 control-label">Status</label>
-            					<div class="col-sm-4">
-            						<select name="status" class="form-control">
-                          <option value="กำลังดำเนินการ">กำลังดำเนินการ</option>
-            							<option value="ยังไม่แล้วเสร็จ">ยังไม่แล้วเสร็จ</option>
-            							<option value="ดำเนินการเสร็จสิ้น">ดำเนินการเสร็จสิ้น</option>
-            						</select>
-            					</div>
-            				</div>
-            				<div class="form-group">
-            					<label class="col-sm-3 control-label">&nbsp;</label>
-            					<div class="col-sm-6">
-            						<input type="submit" name="add" class="btn btn-sm btn-primary" value="บันทึก">
-            						<a href="app.php" class="btn btn-sm btn-danger">ยกเลิก</a>
-            					</div>
-            				</div>
-            			</form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
+        </nav>
         <div class="container">
           <div class="content">
           <h2>จัดการแอปพลิเคชัน</h2>
-    			<h2><b>จัดการแอปพลิเคชัน</b></h2>
+    			<h2><b>ติดตามแอปพลิเคชั่น</b></h2>
 
     			<?php
                 if (isset($_GET['action']) == 'delete') {
@@ -175,7 +91,6 @@ $strSearch=$_GET['strSearch'];
                     if($to>$total_data) $to=$total_data;
                   ?>
           <form class="form-inline" method="get">
-            <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal">เพิ่มแอปพลิเคชั่น</a>
 				<div class="form-group">
 					<select name="filter" class="form-control" onchange="form.submit()">
 						<option value="0">--ตัวกรองข้อมูลแอปพลิเคชั่น--</option>
@@ -200,7 +115,7 @@ $strSearch=$_GET['strSearch'];
               printf(' | หน้า %d <br />',$page);
             ?>
      </div>
-      <br>
+      </br>
       <?php
        $perpage = 10;
        if (isset($_GET['page'])) {
@@ -208,7 +123,9 @@ $strSearch=$_GET['strSearch'];
         } else {
            $page = 1;
         }
+
         $start = ($page - 1) * $perpage;
+
         $sql = "select * from appdata limit {$start} , {$perpage} ";
         $query = mysqli_query($con, $sql);
         ?>
@@ -225,7 +142,6 @@ $strSearch=$_GET['strSearch'];
     					<th>ProjectStart</th>
     					<th>ProjectEnd</th>
     					<th>Status</th>
-              <th>จัดการ</th>
     				</tr>
     				<?php
                     if ($filter) {
@@ -240,9 +156,9 @@ $strSearch=$_GET['strSearch'];
                         while ($row = mysqli_fetch_assoc($query)) {
                             echo '
     						<tr>
-    							<td>'.(($page > 1) ? strval($page - 1).strval($no) : $no ).'</td>
+    								<td>'.(($page > 1) ? strval($page - 1).strval($no) : $no ).'</td>
                   <td>'.$row['id'].'</td>
-    							<td><a href="profile.php?id='.$row['id'].'">'.$row['appname'].'</a></td>
+    							<td><a href="profile_member.php?id='.$row['id'].'">'.$row['appname'].'</a></td>
                                 <td>'.$row['description'].'</td>
                                 <td>'.$row['contact_point'].'</td>
     							<td>'.$row['project_start'].'</td>
@@ -257,21 +173,15 @@ $strSearch=$_GET['strSearch'];
                             }
                             echo '
     							</td>
-    							<td>
-
-    								<a href="edit.php?id='.$row['id'].'" title="แก้ไขข้อมูล" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-    							</td>
     						</tr>
     						';
-
                             $no++;
                         }
                     }
                     ?>
-
                   </tbody>
                   </table>
-                    </div>
+                </div>
                   <?php
                   $sql2 = "select * from appdata ";
                   $query2 = mysqli_query($con, $sql2);
@@ -281,15 +191,15 @@ $strSearch=$_GET['strSearch'];
                   <nav>
                     <ul class="pagination">
                       <li>
-                        <a href="app.php?page=1" aria-label="Previous">
+                        <a href="app_member.php?page=1" aria-label="Previous">
                           <span aria-hidden="true">&laquo;</span>
                         </a>
                       </li>
                       <?php for ($i=1;$i<=$total_page;$i++) { ?>
-                        <li><a href="app.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                        <li><a href="app_member.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
                       <?php } ?>
                       <li>
-                        <a href="app.php?page=<?php echo $total_page;?>" aria-label="Next">
+                        <a href="app_member.php?page=<?php echo $total_page;?>" aria-label="Next">
                           <span aria-hidden="true">&raquo;</span>
                         </a>
                       </li>
@@ -305,17 +215,16 @@ $strSearch=$_GET['strSearch'];
                     });
                   });
                 </script>
-                  <center><a href="admin.php" class="btn btn-sm btn-default">กลับเมนูหลัก</a></center>
+                  <center><a href="member.php" class="btn btn-sm btn-default">กลับเมนูหลัก</a></center>
                   <br>
                   <br>
                   <br>
                   <br>
                   <br>
-                  <br>
+                  <br >
                   <center><a href="" class=""></a></center>
                 </div>
               </div>
-            </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -327,11 +236,6 @@ $strSearch=$_GET['strSearch'];
             $(".main-contain").removeClass("main-contain");
         });
         </script>
-        <script>
-      	$('.date').datepicker({
-      		format: 'dd-mm-yyyy',
-      	})
-      	</script>
         <footer class="container-fluid text-center">
         <center><img src="img\EGAT_Logo.png" class="img-responsive" width="5%" alt="Footer Image" /></center>
         <p><h5>Copyright 2020 : ระบบติดตามแอปพลิเคชั่น Application Tracking System แผนก หรจ-ห. กอง กทห-ห. ฝ่ายจัดการและพัฒนาระบบสารสนเทศ (อจส.)</h5></p>

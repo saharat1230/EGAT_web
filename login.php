@@ -38,6 +38,7 @@ body {
     <meta name='viewport'
       content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
     <link rel='stylesheet' href='css/login.css'/>
+    <link href="https://fonts.googleapis.com/css?family=Prompt&display=swap" rel="stylesheet">
   </head>
   <body>
     <!-- There's nothing here! -->
@@ -48,7 +49,7 @@ body {
     <div class="col-md-4"></div>
     <div class="col-md-4" style="background-color:#FFF0AA">
       <center><img src="img/egatweb.png" alt="EGAT" width="230px" height="100px"></center>
-      <h3 align="center"> ระบบติดตามแอปพลิเคชั่น <br> (Application tracking system) </br> </h3>
+      <h3 align="center"><b> ระบบติดตามแอปพลิเคชั่น <br> (Application tracking system) </b></br> </h3>
       <form  name="formlogin" action="checklogin.php" method="POST" id="login" class="form-horizontal">
         <div class="form-group">
           <div class="col-sm-12">

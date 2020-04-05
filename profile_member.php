@@ -4,7 +4,7 @@ include("condb.php");
 $ID = $_SESSION['ID'];
 $name = $_SESSION['name'];
 $level = $_SESSION['level'];
-    if ($level!='ADMIN') {
+    if ($level!='Member') {
         Header("Location: login.php");
     }
         ?>
@@ -21,9 +21,10 @@ $level = $_SESSION['level'];
 
 	<!-- Bootstrap -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	</style>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 </head>
 <body>
 	<nav class="navbar-inverse">
@@ -50,25 +51,26 @@ $level = $_SESSION['level'];
 		<div class="content">
 			<h2><b> ข้อมูลแอปพลิเคชั่น &raquo; สถานะ </b></h2>
 			<hr />
+
 			<?php
             $id = $_GET['id'];
 
             $sql = mysqli_query($con, "SELECT * FROM appdata WHERE id='$id'");
             if (mysqli_num_rows($sql) == 0) {
-                header("Location: app.php");
+                header("Location: app_member.php");
             } else {
-    $row = mysqli_fetch_assoc($sql);
-}
+                $row = mysqli_fetch_assoc($sql);
+            }
 
-if (isset($_GET['action']) == 'delete') {
-    $delete = mysqli_query($con, "DELETE FROM appdata WHERE id='$id'");
-    if ($delete) {
-        echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ลบข้อมูลสำเร็จแล้ว.</div>';
-        header("refresh: 1; url=app.php");
-    } else {
-        echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ข้อมูลไม่สามารถลบได้.</div>';
-    }
-}
+            if (isset($_GET['action']) == 'delete') {
+                $delete = mysqli_query($con, "DELETE FROM appdata WHERE id='$id'");
+                if ($delete) {
+                    echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ลบข้อมูลสำเร็จแล้ว.</div>';
+                    header("refresh: 1; url=app.php");
+                } else {
+                    echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>ข้อมูลไม่สามารถลบได้.</div>';
+                }
+            }
             ?>
 
 			<table class="striped table-condensed">
@@ -95,19 +97,15 @@ if (isset($_GET['action']) == 'delete') {
         <tr>
 				  <th>ProjectStart</th>
 				  <td><?php echo $row['project_start']; ?></td>
-			   </tr>
+			  </tr>
         <tr>
-          <th>ProjectEnd</th>
- 				  <td><?php echo $row['project_end']; ?></td>
+         <th>ProjectEnd</th>
+ 				 <td><?php echo $row['project_end']; ?></td>
  			  </tr>
-         <tr>
 					<th>Status</th>
-					<td><?php echo $row['status']; ?></p></td>
+					<td><?php echo $row['status']; ?></td>
 				</tr>
 			</table>
-      <br>
-			<a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-warning btn-sm btn_edit"></span>แก้ไขข้อมูล</a>
-			<a href="profile.php?action=delete&id=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('คุณแน่ใจว่าจะลบข้อมูล <?php echo $row['appname']; ?>')"></span> ลบข้อมูล</a>
       <h2><b>ผลการดำเนินงาน</b></h2>
       <div class="panel panel-default">
       <table class="table table-striped table-hover">
@@ -160,8 +158,8 @@ if (isset($_GET['action']) == 'delete') {
           <td><?php echo $row['total_4']; ?></td>
         </tr>
       </table>
-      </div>
-      <center><a href="app.php" class="btn btn-sm btn-default">ย้อนกลับ</a>&nbsp;<a href="admin.php" class="btn btn-sm btn-default">กลับเมนูหลัก</a></center>
+    </div>
+      <center><a href="app_member.php" class="btn btn-sm btn-default">ย้อนกลับ</a>&nbsp;<a href="member.php" class="btn btn-sm btn-default">กลับเมนูหลัก</a></center>
       </br>
       <br>
       <br>
@@ -172,6 +170,7 @@ if (isset($_GET['action']) == 'delete') {
       <center><a href="" class=""></a></center>
 		</div>
 	</div>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<footer class="container-fluid text-center">

@@ -623,7 +623,7 @@
 				return DPGlobal.formatDate(d, format, lang);
 			}).join(this.o.multidateSeparator);
 		},
-		
+
 		getStartDate: function(){
 			return this.o.startDate;
 		},
@@ -634,7 +634,7 @@
 			this.updateNavArrows();
 			return this;
 		},
-		
+
 		getEndDate: function(){
 			return this.o.endDate;
 		},
